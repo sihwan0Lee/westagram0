@@ -25,5 +25,5 @@ class SignInView(View):
             else :
                 return JsonResponse({'message':'비밀번호가 틀렸어요'},status = 200)
 
-        return JsonResponse({'message':'등록되지 않은 이메일 입니다.'},status=200)
+        return JsonResponse({'message':'등록된 이메일이 아닙니다.'},status=200)
  
