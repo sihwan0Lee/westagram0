@@ -1,17 +1,24 @@
 import json
+
 from django.views import View
 from django.http import JsonResponse
+
 from .models import Comment
+from core.utils import login_decorator
 
 class CommentView(View):
+	@login_decorator
 	def post(self, request):
 		data = json.loads(request.body)
 		Comment(
-			email		=	data['email'],
+			email		=	request.user.email,
 			comments	=	data['comments']
 		).save()
 
-		return JsonResponse({'message':'댓글을 썻구나!!'}, status=200)
+		return JsonResponse({'comments':list(Comment.objects.values())}, status=200)
 
+	@login_decorator
 	def get(self, request):
-		return JsonResponse({'comments':list(Comment.objects.value())}, status=200)
+		print(Comment.objects.values())
+		
+		return JsonResponse({'comments':list(Comment.objects.values())}, status=200)

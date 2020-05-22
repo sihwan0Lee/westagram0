@@ -3,5 +3,5 @@ from .views	import CommentView
 
 
 urlpatterns = [
-	path('ent', CommentView.as_view()),
+	path('', CommentView.as_view()),
 ]
